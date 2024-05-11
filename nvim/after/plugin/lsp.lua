@@ -19,7 +19,8 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
     ['<Tab>'] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Insert,
-        select = true }),
+        select = true
+    }),
     ["<C-Space>"] = cmp.mapping.complete(),
     --<C-d> to jump through snippet parameters
 })
@@ -33,9 +34,9 @@ lsp.setup_nvim_cmp({
 
 cmp.setup({
     sources = {
+        { name = 'nvim_luasnip', keyword_length = 2 },
         { name = 'path' },
-        { name = 'nvim_lsp' },
-        { name = 'nvim_luasnip', keyword_length = 3 },
+        { name = 'nvim_lsp', keyword_length = 3 },
         { name = 'buffer',       keyword_length = 3 },
     },
     snippets = {

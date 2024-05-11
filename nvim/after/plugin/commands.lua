@@ -20,4 +20,3 @@ end
 
 --Create File C. Creates a header and C file with some BP
 vim.api.nvim_create_user_command("Cfc", CreateCFile, { nargs='*' })
-

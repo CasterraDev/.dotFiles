@@ -14,6 +14,7 @@ vim.keymap.set("n", "J", "mzJ`z")
 -- Goes half way down/up the page
 vim.keymap.set("n", "<S-d>", "<C-d>zz")
 vim.keymap.set("n", "<S-u>", "<C-u>zz")
+-- Goes up/down when searching with / or ?
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
@@ -21,6 +22,7 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- next greatest remap ever : asbjornHaland
+-- Puts into systems clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 -- Void delete
@@ -43,10 +45,17 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/casterraDev/packer.lua<CR>");
+vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.config/nvim/lua/casterraDev/packer.lua<CR>");
 -- Save the current file
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 
+-- Source file
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
+
+-- Diagonstic keymaps
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, {desc = "Go to previous [D]iagnostic message"})
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, {desc = "Go to next [D]iagnostic message"})
+vim.keymap.set("n", "<leader>g", vim.diagnostic.open_float, {desc = "Show Diagnostic message"})
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, {desc = "Show loclist"})

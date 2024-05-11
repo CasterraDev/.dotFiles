@@ -2,6 +2,7 @@ format = """
 $directory\
 $username\
 ($c)\
+($cpp)\
 ($nodejs)\
 ($git_branch)\
 ($git_state)\

@@ -33,18 +33,30 @@ return require('packer').startup(function(use)
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
 
+    use('lervag/vimtex');
+
     use('mfussenegger/nvim-dap');
-    use('rcarriga/nvim-dap-ui');
+    use('nvim-neotest/nvim-nio')
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
     use('ldelossa/nvim-dap-projects');
     use('theHamsta/nvim-dap-virtual-text');
     use('leoluz/nvim-dap-go')
+    use('mfussenegger/nvim-dap-python')
 
-    use('ThePrimeagen/harpoon')
+    use('lewis6991/gitsigns.nvim')
+
+    use {"ThePrimeagen/harpoon", as = "harpoon", branch = "harpoon2", requires = { { "nvim-lua/plenary.nvim" } } }
     use('mbbill/undotree')
     use('tpope/vim-fugitive')
     use {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
+    }
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
     }
     use {
         'VonHeikemen/lsp-zero.nvim',

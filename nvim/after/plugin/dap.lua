@@ -21,6 +21,7 @@ require('dapui').setup({
     max_type_length = nil,
   },
 })
+require('dap-python').setup('~/.local/share/nvim/mason/packages/debugpy/venv/bin/python')
 require('dap-go').setup()
 require('nvim-dap-virtual-text').setup({});
 local dap = require("dap")
@@ -30,6 +31,7 @@ vim.keymap.set("n", "<leader>b", ":lua require('dap').toggle_breakpoint()<CR>")
 vim.keymap.set("n", "<F10>", ":lua require('dap').step_over()<CR>")
 vim.keymap.set("n", "<F11>", ":lua require('dap').step_into()<CR>")
 vim.keymap.set("n", "<leader>dr", ":lua require('dap').repl.open()<CR>")
+vim.keymap.set("n", "<leader>B", ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
 
 vim.keymap.set("n", "<leader>dt", ":lua require('dapui').toggle()<CR>", { noremap = true })
 
@@ -52,6 +54,7 @@ dap.adapters.codelldb = {
 
 -- get input on runtime
 local get_program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/bin/", "file") end
+local get_cwd = function() return vim.fn.input("Path to cwd: ", vim.fn.getcwd()) end
 local get_args = function() return vim.split(vim.fn.input('args: ', '', 'file'), ' ') end
 
 dap.configurations.c = {
@@ -59,7 +62,7 @@ dap.configurations.c = {
         type = "codelldb",
         request = "launch",
         stopOnEntry = false,
-        cwd = '${workspaceFolder}',
+        cwd = get_cwd,
         program = get_program,
         args = get_args,
         runInTerminal = false,
