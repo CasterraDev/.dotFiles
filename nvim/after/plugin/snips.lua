@@ -8,6 +8,8 @@ ls.config.set_config({
 
 local s = ls.snippet
 local i = ls.insert_node
+local t = ls.text_node
+local c = ls.choice_node
 local rep = require("luasnip.extras").rep
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
@@ -32,6 +34,24 @@ local snips = {
         }}
         ]],
         { i(1, "funcName"), i(2)}
+        )),
+        s({ trig = "div", name = "Div Tag"},
+        fmt(
+        [[
+        <div{}>
+            {}
+        </div>
+        ]],
+        { c(1, {{t' className="', i(1), t'"'}, t""}), i(0)}
+        )),
+        s({ trig = "csf", name = "Const Function"},
+        fmt(
+        [[
+        const {} = ({}) => {{
+            {}
+        }}
+        ]],
+        { i(1), i(2), i(0)}
         ))
     },
 
@@ -97,6 +117,7 @@ vim.api.nvim_set_keymap("s", "<C-r", "<Plug>luasnip_prev_choice", {})
 ls.add_snippets(nil, {
     all = snips.all,
     lua = snips.lua,
+    typescriptreact = snips.javascript,
     javascriptreact = snips.javascript,
     javascript = snips.javascript,
     c = snips.c;

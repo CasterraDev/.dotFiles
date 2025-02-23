@@ -1,4 +1,6 @@
 vim.g.mapleader = ' '
+
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- Go back to netrw
 vim.keymap.set("n", "<leader>pv", ":Ex<CR>")
 -- Moves the cursor to the left/right of the text on the current line

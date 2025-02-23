@@ -20,3 +20,16 @@ end
 
 --Create File C. Creates a header and C file with some BP
 vim.api.nvim_create_user_command("Cfc", CreateCFile, { nargs='*' })
+
+local function compileFromCustomString()
+    local input = vim.fn.input("Compile: ")
+    vim.g.COMPILESTRING = ":below Compile " .. input
+    vim.cmd(vim.g.COMPILESTRING)
+end
+
+local function compileFromLastCommand()
+    vim.cmd(vim.g.COMPILESTRING)
+end
+
+vim.keymap.set("n","<leader>ks", compileFromCustomString)
+vim.keymap.set("n","<leader>kk", compileFromLastCommand)

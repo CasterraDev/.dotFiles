@@ -4,7 +4,6 @@ local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-    'tsserver',
     'clangd',
     'rust_analyzer',
 })
@@ -36,7 +35,7 @@ cmp.setup({
     sources = {
         { name = 'nvim_luasnip', keyword_length = 2 },
         { name = 'path' },
-        { name = 'nvim_lsp', keyword_length = 3 },
+        { name = 'nvim_lsp',     keyword_length = 3 },
         { name = 'buffer',       keyword_length = 3 },
     },
     snippets = {
@@ -46,8 +45,19 @@ cmp.setup({
     },
 })
 
-require('luasnip').filetype_extend("javascript", { "javascriptreact" })
-require('luasnip').filetype_extend("javascript", { "html" })
+local ls = require("luasnip")
+ls.filetype_extend("javascript", { "javascriptreact" })
+ls.filetype_extend("javascript", { "html" })
+vim.keymap.set({ "i", "s" }, "<C-l>", function()
+    if ls.choice_active() then
+        ls.change_choice(1)
+    end
+end)
+vim.keymap.set({ "i", "s" }, "<C-h>", function()
+    if ls.choice_active() then
+        ls.change_choice(-1)
+    end
+end)
 
 lsp.set_preferences({
     suggest_lsp_servers = false,
